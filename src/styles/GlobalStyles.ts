@@ -53,6 +53,10 @@ export const GlobalStyles = createGlobalStyle`
     color: #333;
   }
 
+  html {
+    font-size: 62.5%
+  }
+
   button {
     cursor: pointer;
     font-size: 1rem;
