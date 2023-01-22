@@ -1,6 +1,7 @@
 import * as S from './styles';
 import closeIcon from '../../assets/images/close-icon.svg';
 import { Order } from '../../types/Order';
+import { formatCurrency } from '../../utils/formatCurrency';
 
 interface OrderModalProps {
   visible: boolean;
@@ -21,6 +22,7 @@ const statusText = {
 };
 
 export function OrderModal({visible, order, onClose}: OrderModalProps) {
+
   if(!visible || !order) {
     return null;
   }
@@ -64,7 +66,7 @@ export function OrderModal({visible, order, onClose}: OrderModalProps) {
                 <span className='quantity'>{quantity}x</span>
                 <div className="product-details">
                   <strong>{product.name}</strong>
-                  <span>R${product.price}</span>
+                  <span>{formatCurrency(product.price)}</span>
                 </div>
               </div>
             ))}
