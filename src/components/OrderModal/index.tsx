@@ -2,6 +2,7 @@ import * as S from './styles';
 import closeIcon from '../../assets/images/close-icon.svg';
 import { Order } from '../../types/Order';
 import { formatCurrency } from '../../utils/formatCurrency';
+import { useEffect } from 'react';
 
 interface OrderModalProps {
   visible: boolean;
@@ -23,11 +24,20 @@ const statusText = {
 
 export function OrderModal({visible, order, onClose}: OrderModalProps) {
 
-  // let total = 0;
-  // order?.products.forEach(({ product, quantity}) => {
-  //   product.price * quantity;
-  //   total += product.price * quantity;
-  // });
+  useEffect(() => {
+    document.addEventListener('keydown', handleKeyPress);
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyPress);
+    };
+
+  }, [onClose]);
+
+  function handleKeyPress(event: KeyboardEvent) {
+    if (event.key === 'Escape') {
+      onClose();
+    }
+  }
 
   const total = order?.products.reduce((total, {product, quantity}) => {
     return total + (product.price * quantity);
