@@ -31,7 +31,33 @@ export const ModalBody = styled.div`
     button {
       border: 0;
       background: transparent;
-      display: flex;
+      line-height: 0;
     }
+  }
+
+  .status-container {
+    margin-top: 3.2rem;
+
+    small {
+      font-size: 1.4rem;
+      opacity: 0.8;
+    }
+
+    div {
+      margin-top: 0.8rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+  }
+`;
+
+export const OrderDetails = styled.div`
+  margin-top: 3.2rem;
+
+  > strong {
+    font-weight: 500;
+    font-size: 1.4rem;
+    opacity: 0.8;
   }
 `;
