@@ -111,3 +111,30 @@ export const OrderDetails = styled.div`
     }
   }
 `;
+
+export const Actions = styled.footer`
+  display: flex;
+  flex-direction: column;
+  margin-top: 3.2rem;
+
+  .primary {
+    background-color: #333333;
+    border-radius: 4.8rem;
+    border: 0;
+    color: #fff;
+    padding: 1.2rem 2.4rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    justify-content: center;
+  }
+
+  .secondary {
+    padding: 1.4rem 2.4rem;
+    color: #d73035;
+    font-weight: bold;
+    border: 0;
+    background-color: transparent;
+    margin-top: 1.2rem;
+  }
+`;
