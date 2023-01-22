@@ -24,7 +24,14 @@ const statusText = {
 
 export function OrderModal({visible, order, onClose}: OrderModalProps) {
 
+
   useEffect(() => {
+    function handleKeyPress(event: KeyboardEvent) {
+      if (event.key === 'Escape') {
+        onClose();
+      }
+    }
+
     document.addEventListener('keydown', handleKeyPress);
 
     return () => {
@@ -33,11 +40,7 @@ export function OrderModal({visible, order, onClose}: OrderModalProps) {
 
   }, [onClose]);
 
-  function handleKeyPress(event: KeyboardEvent) {
-    if (event.key === 'Escape') {
-      onClose();
-    }
-  }
+
 
   const total = order?.products.reduce((total, {product, quantity}) => {
     return total + (product.price * quantity);
