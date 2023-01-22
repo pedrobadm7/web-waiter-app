@@ -23,6 +23,16 @@ const statusText = {
 
 export function OrderModal({visible, order, onClose}: OrderModalProps) {
 
+  // let total = 0;
+  // order?.products.forEach(({ product, quantity}) => {
+  //   product.price * quantity;
+  //   total += product.price * quantity;
+  // });
+
+  const total = order?.products.reduce((total, {product, quantity}) => {
+    return total + (product.price * quantity);
+  }, 0);
+
   if(!visible || !order) {
     return null;
   }
@@ -70,6 +80,11 @@ export function OrderModal({visible, order, onClose}: OrderModalProps) {
                 </div>
               </div>
             ))}
+          </div>
+
+          <div className="total">
+            <span>Total</span>
+            <strong>{formatCurrency(total as number)}</strong>
           </div>
         </S.OrderDetails>
       </S.ModalBody>
