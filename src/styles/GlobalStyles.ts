@@ -16,6 +16,7 @@ export const GlobalStyles = createGlobalStyle`
     font-weight: 400;
     font-display: 'swap';
     font-style: 'normal';
+    font-size: 1.6rem;
     src: url('${GeneralSansRegularWoff2}') format('woff2'),
           url('${GeneralSansRegularWoff}') format('woff'),
           url('${GeneralSansRegularTtf}') format('truetype');
@@ -26,6 +27,7 @@ export const GlobalStyles = createGlobalStyle`
     font-weight: 500;
     font-display: 'swap';
     font-style: 'normal';
+    font-size: 1.6rem;
     src: url('${GeneralSansMediumWoff2}') format('woff2'),
           url('${GeneralSansMediumWoff}') format('woff'),
           url('${GeneralSansMediumTtf}') format('truetype');
@@ -36,6 +38,7 @@ export const GlobalStyles = createGlobalStyle`
     font-weight: 600;
     font-display: 'swap';
     font-style: 'normal';
+    font-size: 1.6rem;
     src: url('${GeneralSansSemiboldWoff2}') format('woff2'),
           url('${GeneralSansSemiboldWoff}') format('woff'),
           url('${GeneralSansSemiboldTtf}') format('truetype');
@@ -46,6 +49,7 @@ export const GlobalStyles = createGlobalStyle`
     padding: 0;
     box-sizing: border-box;
     font-family: GeneralSans, sans-serif;
+    font-size: 1.6rem;
   }
 
   body {
