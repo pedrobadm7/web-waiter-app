@@ -24,6 +24,7 @@ export function OrdersBoard({title, icon, orders}: OrdersBoardProps) {
     <S.Board>
       <OrderModal
         visible={isModalVisible}
+        onClose={() => setIsModalVisible(prevStave => !prevStave)}
         order={selectedOrder}
       />
 

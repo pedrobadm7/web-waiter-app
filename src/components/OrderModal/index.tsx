@@ -4,10 +4,23 @@ import { Order } from '../../types/Order';
 
 interface OrderModalProps {
   visible: boolean;
+  onClose: () => void;
   order: Order | null
 }
 
-export function OrderModal({visible, order}: OrderModalProps) {
+const status = {
+  WAITING: '🕢',
+  IN_PRODUCTION: '👩‍🍳',
+  DONE: '✅'
+};
+
+const statusText = {
+  WAITING: 'Fila de espera',
+  IN_PRODUCTION: 'Em preparação',
+  DONE: 'Pronto'
+};
+
+export function OrderModal({visible, order, onClose}: OrderModalProps) {
   if(!visible || !order) {
     return null;
   }
@@ -18,7 +31,7 @@ export function OrderModal({visible, order}: OrderModalProps) {
         <header>
           <strong>Mesa {order.table}</strong>
 
-          <button type='button'>
+          <button type='button' onClick={onClose}>
             <img src={closeIcon} alt='Ícone de fechar o modal' />
           </button>
         </header>
@@ -26,13 +39,36 @@ export function OrderModal({visible, order}: OrderModalProps) {
         <div className="status-container">
           <small>Status do pedido</small>
           <div>
-            <span>🕢</span>
-            <strong>Fila de espera</strong>
+            <span>
+              {status[order.status]}
+            </span>
+            <strong>
+              {statusText[order.status]}
+            </strong>
           </div>
         </div>
 
         <S.OrderDetails>
           <strong>Itens</strong>
+
+          <div className="order-items">
+            {order.products.map(({_id, product, quantity}) => (
+              <div className="item" key={_id}>
+                <img
+                  src={`http://localhost:3001/uploads/${product.imagePath}`}
+                  alt={product.name}
+                  width="60"
+                  height="52"
+                />
+
+                <span className='quantity'>{quantity}x</span>
+                <div className="product-details">
+                  <strong>{product.name}</strong>
+                  <span>R${product.price}</span>
+                </div>
+              </div>
+            ))}
+          </div>
         </S.OrderDetails>
       </S.ModalBody>
     </S.Overlay>
