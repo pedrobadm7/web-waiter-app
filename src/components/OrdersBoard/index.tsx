@@ -10,6 +10,8 @@ interface OrdersBoardProps  {
 
 
 export function OrdersBoard({title, icon, orders}: OrdersBoardProps) {
+
+
   return (
     <S.Board>
       <header>
@@ -18,16 +20,14 @@ export function OrdersBoard({title, icon, orders}: OrdersBoardProps) {
         <span>(1)</span>
       </header>
 
-      <S.OrdersContainer>
-        <button type='button'>
-          <strong>Mesa 2</strong>
-          <span>2 itens</span>
-        </button>
-        <button type='button'>
-          <strong>Mesa 2</strong>
-          <span>2 itens</span>
-        </button>
-      </S.OrdersContainer>
+      {orders.length ? <S.OrdersContainer>
+        {orders.map((order) => (
+          <button key={order._id} type='button'>
+            <strong>Mesa {order.table}</strong>
+            <span>{order.products.length > 1 ? `${order.products.length} itens` : `${order.products.length} item`}</span>
+          </button>
+        ))}
+      </S.OrdersContainer> : null}
     </S.Board>
   );
 }

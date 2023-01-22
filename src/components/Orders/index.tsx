@@ -6,7 +6,7 @@ const orders = [
   {
     _id: '63cbf7d2d32fb6de5e443ba3',
     table: '7',
-    status: 'DONE',
+    status: 'WAITING',
     products: [
       {
         product: {
