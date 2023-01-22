@@ -1,11 +1,20 @@
+import { Order } from '../../types/Order';
 import * as S from './styles';
 
-export function OrdersBoard() {
+interface OrdersBoardProps  {
+  title: string;
+  icon: string;
+  orders: Order[]
+}
+
+
+
+export function OrdersBoard({title, icon, orders}: OrdersBoardProps) {
   return (
     <S.Board>
       <header>
-        <span>🕢</span>
-        <strong>Fila de espera</strong>
+        <span>{icon}</span>
+        <strong>{title}</strong>
         <span>(1)</span>
       </header>
 
