@@ -6,8 +6,10 @@ import { useEffect } from 'react';
 
 interface OrderModalProps {
   visible: boolean;
+  order: Order | null;
+  loading: boolean;
   onClose: () => void;
-  order: Order | null
+  onCancelOrder: () => Promise<void>;
 }
 
 const status = {
@@ -22,8 +24,13 @@ const statusText = {
   DONE: 'Pronto'
 };
 
-export function OrderModal({visible, order, onClose}: OrderModalProps) {
-
+export function OrderModal({
+  visible,
+  order,
+  loading,
+  onClose,
+  onCancelOrder
+}: OrderModalProps) {
 
   useEffect(() => {
     function handleKeyPress(event: KeyboardEvent) {
@@ -42,11 +49,11 @@ export function OrderModal({visible, order, onClose}: OrderModalProps) {
 
 
 
-  const total = order?.products.reduce((total, {product, quantity}) => {
+  const total = order?.products.reduce((total, { product, quantity }) => {
     return total + (product.price * quantity);
   }, 0);
 
-  if(!visible || !order) {
+  if (!visible || !order) {
     return null;
   }
 
@@ -77,7 +84,7 @@ export function OrderModal({visible, order, onClose}: OrderModalProps) {
           <strong>Itens</strong>
 
           <div className="order-items">
-            {order.products.map(({_id, product, quantity}) => (
+            {order.products.map(({ _id, product, quantity }) => (
               <div className="item" key={_id}>
                 <img
                   src={`http://localhost:3001/uploads/${product.imagePath}`}
@@ -102,11 +109,20 @@ export function OrderModal({visible, order, onClose}: OrderModalProps) {
         </S.OrderDetails>
 
         <S.Actions>
-          <button className="primary" type='button'>
+          <button
+            className="primary"
+            type='button'
+            disabled={loading}
+          >
             <span>👩‍🍳</span>
             <span>Iniciar produção</span>
           </button>
-          <button className="secondary" type='button'>
+          <button
+            className="secondary"
+            type='button'
+            onClick={onCancelOrder}
+            disabled={loading}
+          >
             <span>Cancelar pedido</span>
           </button>
         </S.Actions>
