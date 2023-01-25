@@ -3,7 +3,7 @@ import { Order } from '../../types/Order';
 import { OrderModal } from '../OrderModal';
 import * as S from './styles';
 
-interface OrdersBoardProps  {
+interface OrdersBoardProps {
   title: string;
   icon: string;
   orders: Order[]
@@ -11,7 +11,7 @@ interface OrdersBoardProps  {
 
 
 
-export function OrdersBoard({title, icon, orders}: OrdersBoardProps) {
+export function OrdersBoard({ title, icon, orders }: OrdersBoardProps) {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [selectedOrder, setSelectedOrder] = useState<Order | null>(null);
 
