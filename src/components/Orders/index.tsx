@@ -1,4 +1,6 @@
 import { useEffect, useState } from 'react';
+import socketIo from 'socket.io-client';
+
 import { Order } from '../../types/Order';
 import { api } from '../../utils/api';
 import { OrdersBoard } from '../OrdersBoard';
@@ -7,13 +9,22 @@ import * as S from './styles';
 export function Orders() {
   const [orders, setOrders] = useState<Order[]>([]);
 
-  useEffect(() => {
-    async function orderRequest() {
-      const { data } = await api.get('/orders');
-      setOrders(data);
-    }
+  const socket = socketIo('http://localhost:3001', {
+    transports: ['websocket'],
+  });
 
-    orderRequest();
+  useEffect(() => {
+    socket.on('orders@new', (order) => {
+      setOrders(prevState => prevState.concat(order));
+    });
+
+  }, []);
+
+  useEffect(() => {
+    api.get('/orders')
+      .then(({ data }) => {
+        setOrders(data);
+      });
   }, []);
 
   const waiting = orders.filter((order) => order.status === 'WAITING');
