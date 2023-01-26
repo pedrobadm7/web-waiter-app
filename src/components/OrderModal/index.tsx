@@ -10,6 +10,7 @@ interface OrderModalProps {
   loading: boolean;
   onClose: () => void;
   onCancelOrder: () => Promise<void>;
+  onChangeOrderStatus: () => void
 }
 
 const status = {
@@ -24,12 +25,25 @@ const statusText = {
   DONE: 'Pronto'
 };
 
+const buttonTitle = {
+  WAITING: 'Iniciar produção',
+  IN_PRODUCTION: 'Pronto',
+  DONE: ''
+};
+
+const buttonIcon = {
+  WAITING: '👩‍🍳',
+  IN_PRODUCTION: '✅',
+  DONE: ''
+};
+
 export function OrderModal({
   visible,
   order,
   loading,
   onClose,
-  onCancelOrder
+  onCancelOrder,
+  onChangeOrderStatus
 }: OrderModalProps) {
 
   useEffect(() => {
@@ -109,14 +123,18 @@ export function OrderModal({
         </S.OrderDetails>
 
         <S.Actions>
-          <button
-            className="primary"
-            type='button'
-            disabled={loading}
-          >
-            <span>👩‍🍳</span>
-            <span>Iniciar produção</span>
-          </button>
+          {order.status !== 'DONE' ? (
+            <button
+              className="primary"
+              type='button'
+              disabled={loading}
+              onClick={onChangeOrderStatus}
+            >
+              <span>{buttonIcon[order.status]}</span>
+              <span>{buttonTitle[order.status]}</span>
+            </button>
+
+          ) : null}
           <button
             className="secondary"
             type='button'
