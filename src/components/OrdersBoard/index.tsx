@@ -27,14 +27,14 @@ export function OrdersBoard({
   const [selectedOrder, setSelectedOrder] = useState<Order | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
+  const status = selectedOrder && selectedOrder.status === 'WAITING'
+    ? 'IN_PRODUCTION'
+    : 'DONE';
+
   function handleOpenModal(order: Order) {
     setIsModalVisible(true);
     setSelectedOrder(order);
   }
-
-  const status = selectedOrder && selectedOrder.status === 'WAITING'
-    ? 'IN_PRODUCTION'
-    : 'DONE';
 
   async function handleChangeOrderStatus() {
     try {
@@ -64,7 +64,6 @@ export function OrdersBoard({
       setIsLoading(true);
       if (!selectedOrder) return;
 
-      await new Promise(resolve => setTimeout(resolve, 1000));
       await api.delete(`/orders/${selectedOrder._id}`);
     } catch (e) {
       console.log(e);
